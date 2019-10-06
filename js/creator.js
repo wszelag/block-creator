@@ -14,6 +14,8 @@ const creator = () => {
   const material = new THREE.MeshBasicMaterial({
     color: `rgb(${red}, ${green}, ${blue})`
   });
+  material.transparent = true;
+  material.opacity = 0.7;
   const element = new THREE.Mesh(geometry, material);
   element.position.x = posX;
   element.position.y = posY;

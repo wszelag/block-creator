@@ -1,7 +1,7 @@
 //<<--init-->>
 //<-scene
 const scene = new THREE.Scene();
-scene.background = bgColor;
+scene.background = background;
 //<-camera
 const camera = new THREE.PerspectiveCamera(
   75,

@@ -2,6 +2,7 @@
 const animate = () => {
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
+  changeCamera();
 };
 animate();
 document.querySelector("button").addEventListener("click", () => {

@@ -9,7 +9,7 @@ canvas {
   height: 100%;
 }
 
-button {
+button.add {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -31,7 +31,7 @@ button {
   user-select: none;
 }
 
-button::after {
+button.add::after {
   content: "";
   width: 100%;
   height: 100%;
@@ -43,10 +43,21 @@ button::after {
   transition: 0.5s;
 }
 
-button:hover::after {
+button.add:hover::after {
   top: 0;
 }
 
-button:hover {
+button.add:hover {
   color: black;
+}
+
+.settings {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+  font-family: "ABeeZee", sans-serif;
+  border: 2px solid white;
+  padding: 10px;
 }

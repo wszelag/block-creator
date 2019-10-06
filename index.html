@@ -12,10 +12,22 @@
     <title>block creator</title>
   </head>
   <body>
-    <button>Click me!</button>
+    <button class="add">Click me!</button>
+    <aside class="settings">
+      <label
+        >camera
+        <select class="camera-mode">
+          <option value="not move">not move</option>
+          <option value="manually">manually</option>
+          <option value="automatic">automatic</option>
+        </select>
+      </label>
+      <button class="camera-reset">reset</button>
+    </aside>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/init.js"></script>
+    <script src="cameraMode.js"></script>
     <script src="js/cameraMove.js"></script>
     <script src="js/creator.js"></script>
     <script src="js/index.js"></script>
