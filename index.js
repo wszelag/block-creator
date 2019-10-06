@@ -1,7 +1,12 @@
 //<<--settings -->>
+const cameraStartedPosition = 30;
+let cameraSpeedZ = 1;
+const cameraRotationSpeed = 0.0085;
+const bgColor = new THREE.Color("rgb(230, 199, 142)");
+let offsetX = null;
+let offsetY = null;
 //<-scene
 const scene = new THREE.Scene();
-const bgColor = new THREE.Color("rgb(230, 199, 142)");
 scene.background = bgColor;
 //<-camera
 const camera = new THREE.PerspectiveCamera(
@@ -10,7 +15,7 @@ const camera = new THREE.PerspectiveCamera(
   0.5,
   1000
 );
-camera.position.z = 30;
+camera.position.z = cameraStartedPosition;
 //<-renderer
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -41,6 +46,38 @@ const creator = () => {
   scene.add(element);
 };
 
+//<<--camera move function -->>
+const cameraMove = (e, changePositionZ) => {
+  if (changePositionZ) {
+    //<- handle mousewheel event
+    if (e.deltaY < 0) {
+      if (camera.position.z <= 3) return;
+      camera.position.z -= cameraSpeedZ;
+    } else if (e.deltaY > 0) {
+      if (camera.position.z >= 40) return;
+      camera.position.z += cameraSpeedZ;
+    }
+  } else {
+    //handle mousemove event
+    if (e.offsetX > offsetX) {
+      if (camera.rotation.y > 1.5) return;
+      camera.rotation.y += cameraRotationSpeed;
+    } else if (e.offsetX < offsetX) {
+      if (camera.rotation.y < -1.5) return;
+      camera.rotation.y -= cameraRotationSpeed;
+    }
+
+    if (e.offsetY < offsetY) {
+      camera.rotation.x -= cameraRotationSpeed;
+    } else if (e.offsetY > offsetY) {
+      camera.rotation.x += cameraRotationSpeed;
+    }
+  }
+
+  offsetX = e.offsetX;
+  offsetY = e.offsetY;
+};
+
 //<<--init, events-->>
 const animate = () => {
   requestAnimationFrame(animate);
@@ -52,3 +89,5 @@ animate();
 document.querySelector("button").addEventListener("click", () => {
   creator();
 });
+window.addEventListener("mousewheel", e => cameraMove(e, true));
+window.addEventListener("mousemove", e => cameraMove(e, false));
